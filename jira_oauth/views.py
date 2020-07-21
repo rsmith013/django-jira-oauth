@@ -1,6 +1,6 @@
 from django.conf import settings
-from django.shortcuts import redirect, render
-from django.core.urlresolvers import reverse
+from django.shortcuts import redirect
+from django.urls import reverse
 from django.core.exceptions import ImproperlyConfigured
 from oauthlib.oauth1 import SIGNATURE_RSA
 from requests_oauthlib import OAuth1Session

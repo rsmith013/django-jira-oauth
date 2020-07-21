@@ -1,7 +1,7 @@
-from django.conf.urls import patterns, url
-from django.views.generic import TemplateView
+from django.urls import path
+import jira_oauth.views
 
-urlpatterns = patterns('jira_oauth.views',
-    url(r'^authorize/$', 'authorize', name='jira-oauth-authorize'),
-    url(r'^access_token/$', 'access_token', name='jira-oauth-access-token'),
-)
+urlpatterns = [
+    path('authorize/', jira_oauth.views.authorize, name='jira-oauth-authorize'),
+    path('access_token/', jira_oauth.views.access_token, name='jira-oauth-access-token'),
+]
