@@ -1,6 +1,5 @@
-from django.conf import settings
-from django.http import HttpResponseRedirect, HttpResponse
-from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 def jira_access_token_required(view_func):
     """
@@ -9,7 +8,7 @@ def jira_access_token_required(view_func):
     """
     def _jira_access_token_required(request, *args, **kwargs):
         if not 'jira_access_token' in request.session:
-            uri = reverse("jira-oauth-authorize")
+            uri = reverse('jira_oauth:jira_oauth_authorize')
             if '?' in uri:
                 uri += '&'
             else:

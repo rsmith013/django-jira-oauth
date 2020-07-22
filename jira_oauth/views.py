@@ -59,7 +59,7 @@ def authorize(request):
         request_token['oauth_token'],
         scheme, 
         request.get_host(), 
-        reverse('jira-oauth-access-token')
+        reverse('jira_oauth:jira_oauth_access_token')
     )
 
     return redirect(redirect_url)
@@ -81,7 +81,9 @@ def access_token(request):
                           signature_type='auth_header', 
                           signature_method=SIGNATURE_RSA, 
                           rsa_key=settings.JIRA_PRIVATE_RSA_KEY,
-                          resource_owner_key=request.GET['oauth_token'])
+                          resource_owner_key=request.GET['oauth_token'],
+                          # JIRA does not care about verifier, this is a random string
+                          verifier='jira_verifier')
     
     try:
         token = oauth.fetch_access_token(settings.JIRA_ACCESS_TOKEN_URL)
